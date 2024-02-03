@@ -1,0 +1,40 @@
+NIP: 820731
+Apellidos: Román Gracia
+Nombre: Inés
+
+Comentarios:
+
+Ejercicio 1
+
+- Versión 1:
+	
+	El programa declara tres threads de manera independiente que escriben
+	por pantalla "Soy"+nombre; cada uno de ellos con un nombre, un retardo
+	y un número de repeticiones diferentes.
+	Finalmente, al acabar de ejecutarse todos los threads el programa escribe
+	por pantalla "Fin".
+
+-Versión 2:
+	
+	En esta otra versión se declara un vector de tres threads que hacen lo
+	mismo que en la anterior. De esta forma el código es más claro y nos
+	acabar los procesos utilizando un bucle for, en vez de hacerlo uno por
+	uno como en el caso anterior.
+	
+Ambas versiones dan resultados parecidos.
+Si utilizamos en el procedimiento saludo la instruccion:
+ cout << "Soy " << nombre << endl
+esto provoca que a veces un proceso cambie de línea mientras otro está escribiendo.
+
+
+Ejercicio 2
+
+Fichero fuente: ejercicio_2.cpp
+Compilar mediante g++ ejercicio_2.cpp -o ejercicio_2 -std=c++11 -pthread
+
+
+Ejercicio 2
+
+Fichero fuente: ejercicio_3.cpp
+Compilar mediante g++ ejercicio_3.cpp -o ejercicio_3 -std=c++11 -pthread
+

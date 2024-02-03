@@ -1,0 +1,46 @@
+#*****************************************************************
+# File:   Makefile_p4
+# Author: Inés Román Gracia
+#         Francisco Javier Pizarro Martínez
+# Date:   18/11/2021
+# Coms:   Ejecutar "make" para compilar (o "make -f Makefile")
+#         Ejecutar "make clean" para limpiar (borrar lo que genere)
+#*****************************************************************
+
+#---------------------------------------------------------
+# macros
+RM = /bin/rm -f  # para limpiar
+CC = g++         # compilador
+#---------------------------------------------------------
+# opciones compilación y enlazado ("linkado")
+CPPFLAGS = -I. -I${LOG_LIB} -O2 -std=c++11 -fmax-errors=1 -D LOGGING_MODE # opciones compilación
+LDFLAGS  = -pthread  # opciones de "linkado"
+#---------------------------------------------------------
+# vars
+EJEC = practica_4
+MONITOR = ControlCabinas
+#---------------------------------------------------------
+#directorio y clase para manejo de logs
+LOG_LIB=./librerias/Logger_V3
+LOGGER=${LOG_LIB}/Logger
+
+all: ${EJEC}
+#---------------------------------------------------------
+# "linkar"
+${EJEC}: ${EJEC}.o ${MONITOR}.o ${LOGGER}.o
+	${CC} ${EJEC}.o ${MONITOR}.o ${LOGGER}.o -o ${EJEC} ${CPPFLAGS} ${LDFLAGS}
+
+#---------------------------------------------------------
+# compilar
+${EJEC}.o: ${EJEC}.cpp 
+	${CC} -c ${EJEC}.cpp ${CPPFLAGS}
+
+${LOGGER}.o: ${LOGGER}.hpp ${LOGGER}.cpp
+	${CC} -c ${LOGGER}.cpp -o ${LOGGER}.o ${CPPFLAGS}
+
+${MONITOR}.o: ${MONITOR}.hpp ${MONITOR}.cpp
+	${CC} -c ${MONITOR}.cpp -o ${MONITOR}.o ${CPPFLAGS}
+#---------------------------------------------------------
+# Cuidado con lo que se pone aquí, que se borra sin preguntar
+clean:
+	$(RM) ${LOGGER}.o ${MONITOR}.o ${EJEC}.o ${EJEC}
